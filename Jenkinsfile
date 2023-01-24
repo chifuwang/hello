@@ -1,11 +1,11 @@
 pipeline {
 
-  agent {
-    docker {
-      image "docker.io/library/maven:3.8.3-openjdk-17"
-    }
-  }
+  agent any
 
+  tools{
+    maven 'maven387'
+    jdk 'jdk-17'
+  }
 
   stages {
 
