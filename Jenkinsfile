@@ -13,12 +13,10 @@ pipeline {
 
   stages {
 
-    stage("Build") {
+    stage("Build jar") {
       steps {
         sh "mvn -version"
         sh "mvn clean package"
-        sh "docker info"
-        sh "docker build -t hello:${DOCKER_BUILD_VERSION} ."
       }
     }
 
@@ -26,8 +24,7 @@ pipeline {
 
   post {
     always {
-      //cleanWs() 
-      sh "echo 'always' "
+      cleanWs() 
     }
 
   }
