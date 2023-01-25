@@ -22,7 +22,7 @@ pipeline {
 
     stage("Build Docker image") {
       steps {
-        sh "./jenkins-script/build-docker.sh"
+        sh "./jenkins-scripts/build-docker.sh"
       }
 
     }
