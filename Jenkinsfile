@@ -18,7 +18,7 @@ pipeline {
         sh "mvn -version"
         sh "mvn clean package"
         sh "docker info"
-        sh "docker build -t 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION}"
+        sh "docker build -t 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION} ."
       }
     }
 
