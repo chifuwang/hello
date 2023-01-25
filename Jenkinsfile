@@ -27,6 +27,7 @@ pipeline {
   post {
     always {
       //cleanWs() 
+      sh "echo 'always' "
     }
 
   }
