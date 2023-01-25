@@ -1,5 +1,3 @@
-def docker_version = v1
-
 pipeline {
 
   agent any 
@@ -9,6 +7,10 @@ pipeline {
     jdk 'jdk-17'
   }
 
+  environment {
+    DOCKER_BUILD_VERSION = "v1"
+  }
+
   stages {
 
     stage("Build") {
@@ -16,7 +18,7 @@ pipeline {
         sh "mvn -version"
         sh "mvn clean package"
         sh "docker info"
-        sh "docker build -t 192.168.254.151:9283/hello:${docker_version}"
+        sh "docker build -t 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION}"
       }
     }
 
