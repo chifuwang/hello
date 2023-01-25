@@ -20,6 +20,13 @@ pipeline {
       }
     }
 
+    stage("Build Docker image") {
+      steps {
+        sh "./jenkins-script/build-docker.sh"
+      }
+
+    }
+
   }
 
   post {
