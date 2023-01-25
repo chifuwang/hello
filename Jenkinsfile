@@ -1,3 +1,5 @@
+def docker_version = v1
+
 pipeline {
 
   agent any 
@@ -14,6 +16,7 @@ pipeline {
         sh "mvn -version"
         sh "mvn clean package"
         sh "docker info"
+        sh "docker build -t 192.168.254.151:9283/hello:${docker_version}"
       }
     }
 
