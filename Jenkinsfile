@@ -3,7 +3,7 @@ pipeline {
   agent {
     docker {
       image "docker.io/library/maven:3.8.3-openjdk-17"
-      args "-u root -v /var/run/docker.sock:/var/run/docker.sock -e DOCKER_HOST='unix:///var/run/docker.sock' "
+      args "-v /run/docker.sock:/var/run/docker.sock -e DOCKER_HOST='unix:///run/docker.sock' "
     }
   }
 
