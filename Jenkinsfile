@@ -73,7 +73,6 @@ pipeline {
             #!/bin/bash
             ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
             podman run -d --name hello -p 8080:8080 --rm 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION}
-            podman container rm hello 
             exit 0
             <<EOF
             """
