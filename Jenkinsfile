@@ -8,7 +8,7 @@ pipeline {
   }
 
   environment {
-    DOCKER_BUILD_VERSION = "v1"
+    DOCKER_BUILD_VERSION = "v2"
     PASS = credentials('nexus_secret')
   }
 
