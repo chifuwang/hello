@@ -35,6 +35,20 @@ pipeline {
       }
     }
 
+    stage("Remove Existing Image") {
+      steps {
+        script {
+          sh """
+            #!/bin/bash
+            ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
+            podman rmi 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION}
+            exit 0
+            <<EOF
+            """
+        } 
+      }
+    }
+
     stage("Build Docker image") {
       steps {
         script {
@@ -73,6 +87,20 @@ pipeline {
             #!/bin/bash
             ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
             podman run -d --name hello -p 10080:8080 --rm 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION}
+            exit 0
+            <<EOF
+            """
+        } 
+      }
+    }
+    
+    stage("Cleanup Dangling Images") {
+      steps {
+        script {
+          sh """
+            #!/bin/bash
+            ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
+            podman rmi -f $(podman images -f "dangling=true" -q)
             exit 0
             <<EOF
             """
