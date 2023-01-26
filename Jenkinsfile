@@ -12,6 +12,10 @@ pipeline {
     PASS = credentials('nexus_secret')
   }
 
+  triggers {
+    pollSCM('* * * * *')
+  }
+
   stages {
 
     stage("Build jar") {
