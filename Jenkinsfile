@@ -22,10 +22,10 @@ pipeline {
 
     stage("Build Docker image") {
       steps {
-        sh '''
-          ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151
-          whoami
-        ''' 
+        sh """ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
+             whoami
+             ls -la
+          EOF""
       }
 
     }
