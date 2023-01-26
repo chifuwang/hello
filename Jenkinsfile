@@ -58,8 +58,7 @@ pipeline {
           sh """
             #!/bin/bash
             ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
-            podman container stop hello
-            podman container rm hello 
+            podman container stop hello && podman container rm hello -f
             exit 0
             <<EOF
             """
