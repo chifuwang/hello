@@ -9,6 +9,7 @@ pipeline {
 
   environment {
     DOCKER_BUILD_VERSION = "v1"
+    PASS = credentials('nexus_secret')
   }
 
   stages {
@@ -27,6 +28,7 @@ pipeline {
             #!/bin/bash
             ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
             cd /home/chifu/dev-podman/jenkins_home/workspace/hello
+            podman login -u admin -p ${PASS}
             podman build -t 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION} . 
             exit 0
             <<EOF
