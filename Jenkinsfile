@@ -97,13 +97,13 @@ pipeline {
     stage("Cleanup Dangling Images") {
       steps {
         script {
-          sh """
+          sh '''
             #!/bin/bash
             ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
             podman rmi -f $(podman images -f "dangling=true" -q)
             exit 0
             <<EOF
-            """
+            '''
         } 
       }
     }
