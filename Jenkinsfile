@@ -21,6 +21,20 @@ pipeline {
       }
     }
 
+    stage("Stop Running Container") {
+      steps {
+        script {
+          sh """
+            #!/bin/bash
+            ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
+            podman container stop hello && podman container rm hello -f
+            exit 0
+            <<EOF
+            """
+        } 
+      }
+    }
+
     stage("Build Docker image") {
       steps {
         script {
@@ -45,20 +59,6 @@ pipeline {
             #!/bin/bash
             ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
             podman push 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION}  
-            exit 0
-            <<EOF
-            """
-        } 
-      }
-    }
-    
-    stage("Stop Running Container") {
-      steps {
-        script {
-          sh """
-            #!/bin/bash
-            ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
-            podman container stop hello && podman container rm hello -f
             exit 0
             <<EOF
             """
