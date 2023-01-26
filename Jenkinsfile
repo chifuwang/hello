@@ -24,7 +24,6 @@ pipeline {
       steps {
         sh '''
           ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151
-          podman info
           whoami
         ''' 
       }
