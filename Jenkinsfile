@@ -79,7 +79,35 @@ pipeline {
         } 
       }
     }
-    
+
+    stage("Delete Local Image") {
+      steps {
+        script {
+          sh """
+            #!/bin/bash
+            ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
+            podman rmi 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION}  
+            exit 0
+            <<EOF
+            """
+        } 
+      }
+    }
+
+    stage("Pull Docker image") {
+      steps {
+        script {
+          sh """
+            #!/bin/bash
+            ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
+            podman pull 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION}  
+            exit 0
+            <<EOF
+            """
+        } 
+      }
+    }
+
     stage("Start Container") {
       steps {
         script {
