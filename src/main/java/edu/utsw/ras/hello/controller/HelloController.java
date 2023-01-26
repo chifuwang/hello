@@ -1,4 +1,4 @@
-package controller;
+package edu.utsw.ras.hello.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/hello")
-    public ResponseEntity<String> getHelloMessage() {
-        return new ResponseEntity<>("Hello", HttpStatus.OK);
+    public String getHelloMessage() {
+        return "Hello";
     }
 }
