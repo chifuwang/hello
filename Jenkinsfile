@@ -26,7 +26,8 @@ pipeline {
           sh """
             #!/bin/bash
             ssh -i /var/jenkins_home/ssh/dev chifu@192.168.254.151 << EOF 
-            podman build -t 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION} 
+            cd /var/jenkins_home/workspace/hello
+            podman build -t 192.168.254.151:9283/hello:${DOCKER_BUILD_VERSION} . 
             exit 0
             <<EOF
             """
